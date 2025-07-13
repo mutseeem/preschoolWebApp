@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نموذج التسجيل - روضة النجوم الصغار</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles - Same as Landing Page */
+        :root {
+            --primary: #FF9E3F;
+            --secondary: #6BD5E1;
+            --accent: #FFD166;
+            --dark: #2B2D42;
+            --light: #F8F7FF;
+            --pink: #FF6B6B;
+            --green: #06D6A0;
+            --input-border: #ddd;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        /* Navigation - Same as Landing Page */
+        nav {
+            background-color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+        }
+        
+        .logo span {
+            font-size: 1.5rem;
+            margin-left: 0.5rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--secondary);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Form Container */
+        .form-container {
+            max-width: 800px;
+            margin: 100px auto 50px;
+            padding: 2.5rem;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .form-title {
+            text-align: center;
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-description {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        /* Form Styles - Improved Spacing */
+        .enroll-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.8rem;
+        }
+        
+        .form-group {
+            margin-bottom: 0;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: bold;
+            color: var(--dark);
+            font-size: 1.05rem;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border: 2px solid var(--input-border);
+            border-radius: 12px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+            box-sizing: border-box;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--secondary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(107, 213, 225, 0.2);
+        }
+        
+        /* Radio Group - Improved Spacing */
+        .radio-group {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            margin-top: 0.8rem;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+        
+        .radio-option input {
+            width: auto;
+            margin: 0;
+        }
+        
+        /* Health Problem Field */
+        .health-problem-field {
+            display: none;
+            grid-column: 1 / -1;
+            margin-top: 0.5rem;
+            animation: fadeIn 0.5s;
+            padding: 0.5rem 0;
+        }
+        
+        /* Submit Button - Improved Spacing */
+        .submit-btn {
+            grid-column: 1 / -1;
+            background-color: var(--pink);
+            color: white;
+            border: none;
+            padding: 1.1rem;
+            font-size: 1.2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 1.5rem;
+            box-shadow: 0 5px 15px rgba(255,107,107,0.4);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+        
+        .submit-btn:hover {
+            background-color: #ff5252;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255,107,107,0.6);
+        }
+        
+        /* Footer - Same as Landing Page */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 5%;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .social-icons {
+            font-size: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .social-icons a {
+            color: white;
+            margin: 0 0.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: var(--accent);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .form-container {
+                margin: 80px 20px 30px;
+                padding: 1.8rem;
+            }
+            
+            .form-title {
+                font-size: 2rem;
+                margin-bottom: 1.2rem;
+            }
+            
+            .form-description {
+                font-size: 1.1rem;
+                margin-bottom: 2rem;
+            }
+            
+            .enroll-form {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 0.8rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            روضة النجوم الصغار <span>🌱</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">الرئيسية</a>
+            <a href="index.html#about">عن الروضة</a>
+            <a href="index.html#programs">البرامج</a>
+            <a href="#enroll">التسجيل</a>
+            <a href="index.html#contact">اتصل بنا</a>
+        </div>
+    </nav>
+    
+    <!-- Form Container -->
+    <div class="form-container">
+        <h1 class="form-title">نموذج تسجيل الطفل</h1>
+        <p class="form-description">الرجاء تعبئة جميع الحقول المطلوبة بدقة لتسجيل طفلك في روضة النجوم الصغار<br>سيتم التواصل معكم خلال 48 ساعة من استلام النموذج</p>
+        
+        <form class="enroll-form" id="enrollmentForm">
+            <!-- Parent Information -->
+            <div class="form-group">
+                <label for="fatherFirstName">اسم الأب الأول</label>
+                <input type="text" id="fatherFirstName" name="fatherFirstName" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="fatherLastName">اسم العائلة (الأب)</label>
+                <input type="text" id="fatherLastName" name="fatherLastName" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="motherFirstName">اسم الأم الأول</label>
+                <input type="text" id="motherFirstName" name="motherFirstName" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="motherLastName">اسم العائلة (الأم)</label>
+                <input type="text" id="motherLastName" name="motherLastName" required>
+            </div>
+            
+            <!-- Child Information -->
+            <div class="form-group">
+                <label for="childName">اسم الطفل/الطفلة</label>
+                <input type="text" id="childName" name="childName" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="childBirthDate">تاريخ ميلاد الطفل</label>
+                <input type="date" id="childBirthDate" name="childBirthDate" required>
+            </div>
+            
+            <!-- Contact Information -->
+            <div class="form-group">
+                <label for="parentPhone">رقم هاتف ولي الأمر</label>
+                <input type="tel" id="parentPhone" name="parentPhone" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="parentEmail">البريد الإلكتروني لولي الأمر</label>
+              <input type="email" id="parentEmail" name="parentEmail" required>        
+            </div>
+            
+            <!-- Health Information -->
+            <div class="form-group" style="grid-column: 1 / -1; margin-top: 0.5rem;">
+                <label>هل يعاني الطفل من أي مشاكل صحية؟</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="healthYes" name="healthProblem" value="yes">
+                        <label for="healthYes">نعم</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="healthNo" name="healthProblem" value="no" checked>
+                        <label for="healthNo">لا</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group health-problem-field" id="healthProblemField">
+                <label for="healthProblemDetails">الرجاء تحديد المشكلة الصحية</label>
+                <textarea id="healthProblemDetails" name="healthProblemDetails" rows="4"></textarea>
+            </div>
+            <input type="hidden" name="healthProblem" id="hiddenHealth">
+           <input type="hidden" name="email" id="hiddenEmail">
+
+
+            <!-- Submit Button -->
+            <button type="submit" class="submit-btn">
+                <span>📝</span> تسجيل الطفل
+            </button>
+        </form>
+    </div>
+    
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="logo" style="color: white; justify-content: center;">روضة النجوم الصغار <span>🌱</span></div>
+        <div class="footer-links">
+            <a href="index.html#about">عن الروضة</a>
+            <a href="index.html#programs">البرامج</a>
+            <a href="index.html#testimonials">آراء العملاء</a>
+            <a href="#enroll">التسجيل</a>
+            <a href="index.html#contact">اتصل بنا</a>
+        </div>
+        <div class="social-icons">
+            <a href="#">📱</a>
+            <a href="#">💻</a>
+            <a href="#">📧</a>
+            <a href="#">📞</a>
+        </div>
+        <p>123 شارع التعلم، مدينة المعرفة | 555 123 4567 | info@nujum.edu</p>
+        <p>© 2023 روضة النجوم الصغار. جميع الحقوق محفوظة.</p>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show/hide health problem field based on radio selection
+            const healthYes = document.getElementById('healthYes');
+            const healthNo = document.getElementById('healthNo');
+            const healthProblemField = document.getElementById('healthProblemField');
+            
+            healthYes.addEventListener('change', function() {
+                if(this.checked) {
+                    healthProblemField.style.display = 'block';
+                    document.getElementById('healthProblemDetails').required = true;
+                }
+            });
+            
+            healthNo.addEventListener('change', function() {
+                if(this.checked) {
+                    healthProblemField.style.display = 'none';
+                    document.getElementById('healthProblemDetails').required = false;
+                }
+            });
+            
+            // Form submission
+            const enrollmentForm = document.getElementById('enrollmentForm');
+            
+        });
+    </script>
+    <!-- ✅ EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    emailjs.init("IZPH5NqO0Gw4T20hb");
+
+    document.getElementById('enrollmentForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Collect form data
+        const formData = {
+            // Admin email data
+            fatherFirstName: this.fatherFirstName.value,
+            fatherLastName: this.fatherLastName.value,
+            motherFirstName: this.motherFirstName.value,
+            motherLastName: this.motherLastName.value,
+            childName: this.childName.value,
+            childBirthDate: this.childBirthDate.value,
+            parentPhone: this.parentPhone.value,
+            parentEmail: this.parentEmail.value,
+            healthProblem: document.querySelector('input[name="healthProblem"]:checked').value === "yes" ? "نعم" : "لا",
+            healthProblemDetails: this.healthProblemDetails?.value || "لا يوجد",
+            
+            // Parent email data - must match template EXACTLY
+            email: this.parentEmail.value  // Critical for recipient address
+        };
+
+        // Send to parent first (simpler template)
+        emailjs.send("service_yhqp0qs", "template_yad5mij", {
+            fatherFirstName: formData.fatherFirstName,
+            childName: formData.childName,
+            email: formData.parentEmail  // Must match template's {{email}}
+        })
+        .then(() => {
+            // Then send to admin
+            return emailjs.send("service_yhqp0qs", "template_vueflpq", formData);
+        })
+        .then(() => {
+            alert("✅ تم الإرسال بنجاح!");
+            this.reset();
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert(`❌ فشل الإرسال: ${error.text || "يرجى المحاولة لاحقاً"}`);
+        });
+    });
+});
+</script>
+</body>
+</html>
