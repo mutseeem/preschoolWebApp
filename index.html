@@ -4,40 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>روضة أطفال النجوم الصغار - التسجيل</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Base Styles */
         :root {
             --primary: #FF9E3F;
+            --primary-light: #FFB166;
             --secondary: #6BD5E1;
+            --secondary-light: #8FE0E9;
             --accent: #FFD166;
+            --accent-light: #FFDE8A;
             --dark: #2B2D42;
+            --dark-light: #4A4D6D;
             --light: #F8F7FF;
+            --light-dark: #E5E4F0;
             --pink: #FF6B6B;
+            --pink-light: #FF8E8E;
             --green: #06D6A0;
+            --green-light: #3CDFB5;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
         
         body {
-            margin: 0;
-            padding: 0;
             font-family: 'Tajawal', sans-serif;
             background-color: var(--light);
             color: var(--dark);
             overflow-x: hidden;
+            line-height: 1.6;
         }
         
         /* Navigation */
         nav {
             background-color: white;
-            padding: 1rem 2rem;
+            padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        nav.scrolled {
+            padding: 0.5rem 5%;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.15);
         }
         
         .logo {
@@ -46,11 +65,18 @@
             display: flex;
             align-items: center;
             font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
         }
         
         .logo span {
             font-size: 1.5rem;
             margin-left: 0.5rem;
+            animation: pulse 2s infinite;
         }
         
         .nav-links {
@@ -65,6 +91,7 @@
             font-size: 1.1rem;
             transition: all 0.3s;
             position: relative;
+            padding: 0.5rem 0;
         }
         
         .nav-links a:hover {
@@ -74,16 +101,24 @@
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: 0;
             right: 0;
             width: 0;
             height: 3px;
             background-color: var(--secondary);
             transition: width 0.3s;
+            border-radius: 3px;
         }
         
         .nav-links a:hover::after {
             width: 100%;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--dark);
         }
         
         /* Hero Section */
@@ -100,6 +135,7 @@
         .hero-content {
             flex: 1;
             z-index: 2;
+            animation: fadeInUp 1s ease-out;
         }
         
         .hero h1 {
@@ -107,12 +143,14 @@
             margin: 0;
             color: var(--primary);
             line-height: 1.3;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
         
         .hero p {
             font-size: 1.5rem;
             max-width: 600px;
             margin: 1.5rem 0;
+            color: var(--dark-light);
         }
         
         .cta-button {
@@ -128,18 +166,39 @@
             transition: all 0.3s;
             display: inline-flex;
             align-items: center;
+            position: relative;
+            overflow: hidden;
         }
         
         .cta-button:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(255,107,107,0.6);
-            background-color: #ff5252;
+            box-shadow: 0 8px 25px rgba(255,107,107,0.6);
+            background-color: var(--pink-light);
+        }
+        
+        .cta-button:active {
+            transform: translateY(0);
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
         }
         
         .cta-button span {
             margin-right: 0.5rem;
             font-size: 1.5rem;
-            animation: bounce 1s infinite alternate;
+            animation: bounce 1.5s infinite alternate;
         }
         
         .hero-images {
@@ -149,68 +208,95 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            perspective: 1000px;
         }
         
         .child-image {
             position: absolute;
-            width: 200px;
-            height: 200px;
+            width: 320px; /* Increased size */
+            height: 320px; /* Increased size */
             border-radius: 20px;
             object-fit: cover;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
             transition: all 0.5s;
+            transform-style: preserve-3d;
+            border: 5px solid white;
         }
         
         .child-1 {
             top: 10%;
-            right: 10%;
+            right: 5%;
             z-index: 3;
-            animation: float-1 4s infinite ease-in-out;
+            animation: float-1 6s infinite ease-in-out;
         }
         
         .child-2 {
             top: 40%;
-            right: 25%;
+            right: 20%;
             z-index: 2;
-            animation: float-2 5s infinite ease-in-out;
+            animation: float-2 7s infinite ease-in-out;
         }
         
         .child-3 {
             top: 20%;
-            right: 5%;
+            right: 0;
             z-index: 1;
-            animation: float-3 6s infinite ease-in-out;
+            animation: float-3 8s infinite ease-in-out;
         }
         
-        /* Background Elements */
-        .bg-element {
+        /* Floating Elements */
+        .floating-elements {
             position: absolute;
-            border-radius: 50%;
-            opacity: 0.1;
-            z-index: 0;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
         }
         
-        .bg-1 {
-            width: 300px;
-            height: 300px;
-            background-color: var(--primary);
-            top: -100px;
-            left: -100px;
+        .floating-element {
+            position: absolute;
+            opacity: 0.7;
+            z-index: -1;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
         }
         
-        .bg-2 {
-            width: 200px;
-            height: 200px;
-            background-color: var(--secondary);
-            bottom: -50px;
-            right: -50px;
+        .floating-element.shape-1 {
+            top: 15%;
+            left: 5%;
+            width: 60px;
+            animation: float-shape-1 15s infinite linear;
+        }
+        
+        .floating-element.shape-2 {
+            top: 70%;
+            left: 20%;
+            width: 80px;
+            animation: float-shape-2 20s infinite linear;
+        }
+        
+        .floating-element.shape-3 {
+            top: 30%;
+            left: 80%;
+            width: 50px;
+            animation: float-shape-3 18s infinite linear;
+        }
+        
+        .floating-element.shape-4 {
+            top: 80%;
+            left: 70%;
+            width: 70px;
+            animation: float-shape-4 25s infinite linear;
         }
         
         /* Features Section */
         .features {
-            padding: 5rem 5%;
+            padding: 6rem 5%;
             background-color: white;
             position: relative;
+            overflow: hidden;
         }
         
         .section-title {
@@ -218,150 +304,676 @@
             font-size: 3rem;
             margin-bottom: 3rem;
             color: var(--primary);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
         }
         
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            gap: 2.5rem;
+            margin-top: 3rem;
         }
         
         .feature-card {
             background-color: var(--light);
             border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: all 0.3s;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.05);
         }
         
         .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+        
+        .feature-icon-container {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--pink));
+            box-shadow: 0 10px 20px rgba(255,107,107,0.3);
+            transition: all 0.5s;
+        }
+        
+        .feature-card:hover .feature-icon-container {
+            transform: rotate(15deg) scale(1.1);
+            background: linear-gradient(135deg, var(--pink), var(--primary));
         }
         
         .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: 3.5rem;
+            color: white;
+            transition: all 0.3s;
         }
         
         .feature-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
+            margin: 1rem 0;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .feature-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: width 0.3s;
+        }
+        
+        .feature-card:hover h3::after {
+            width: 100%;
+        }
+        
+        /* Programs Section */
+        .programs {
+            padding: 6rem 5%;
+            background-color: #f0f9ff;
+            position: relative;
+        }
+        
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        .program-card {
+            background-color: white;
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.4s;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .program-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .program-card .feature-icon-container {
+            background: linear-gradient(135deg, var(--primary), var(--pink));
+            box-shadow: 0 10px 20px rgba(255,107,107,0.3);
+        }
+        
+        .program-card:nth-child(2) .feature-icon-container {
+            background: linear-gradient(135deg, var(--secondary), var(--green));
+            box-shadow: 0 10px 20px rgba(107,214,225,0.3);
+        }
+        
+        .program-card:nth-child(3) .feature-icon-container {
+            background: linear-gradient(135deg, var(--accent), var(--green));
+            box-shadow: 0 10px 20px rgba(255,209,102,0.3);
+        }
+        
+        .program-card h3 {
+            font-size: 1.6rem;
             margin: 1rem 0;
             color: var(--dark);
         }
         
+        .program-card p {
+            margin-bottom: 2rem;
+            color: var(--dark-light);
+        }
+        
         /* Testimonials */
         .testimonials {
-            padding: 5rem 5%;
-            background-color: #f0f9ff;
+            padding: 6rem 5%;
+            background-color: white;
             text-align: center;
+            position: relative;
         }
         
         .testimonial-slider {
             max-width: 800px;
-            margin: 0 auto;
+            margin: 3rem auto 0;
             position: relative;
+            overflow: hidden;
+            height: 350px;
         }
         
         .testimonial {
             background-color: white;
-            padding: 2rem;
+            padding: 2.5rem;
             border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            margin: 2rem 0;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            margin: 0 auto;
+            width: 90%;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: all 0.5s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .testimonial.active {
+            opacity: 1;
+            z-index: 1;
+        }
+        
+        .testimonial i.quote-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            opacity: 0.3;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        
+        .testimonial p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--dark-light);
+            font-style: italic;
         }
         
         .parent-info {
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: 1rem;
+            margin-top: 2rem;
         }
         
         .parent-avatar {
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
-            background-color: var(--secondary);
+            background: linear-gradient(135deg, var(--primary), var(--pink));
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-left: 1rem;
+            margin-left: 1.5rem;
             color: white;
+            font-size: 1.8rem;
+            box-shadow: 0 5px 15px rgba(255,107,107,0.3);
+        }
+        
+        .parent-details h4 {
+            font-size: 1.3rem;
+            color: var(--dark);
+        }
+        
+        .parent-details p {
+            font-size: 1rem;
+            color: var(--primary);
+            margin-top: 0.3rem;
+            font-style: normal;
+        }
+        
+        .testimonial-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--light-dark);
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .dot.active {
+            background-color: var(--primary);
+            transform: scale(1.2);
+        }
+        
+        /* Gallery Section */
+        .gallery {
+            padding: 6rem 5%;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            height: 250px;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+            opacity: 0;
+            transition: all 0.3s;
+        }
+        
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+        
+        /* Enrollment CTA */
+        .enrollment-cta {
+            padding: 6rem 5%;
+            background: linear-gradient(135deg, var(--primary), var(--pink));
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .enrollment-cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        .enrollment-cta h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .enrollment-cta p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            position: relative;
+        }
+        
+        .enrollment-cta .cta-button {
+            background-color: white;
+            color: var(--pink);
             font-size: 1.5rem;
+            padding: 1.2rem 3rem;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .enrollment-cta .cta-button:hover {
+            background-color: var(--light);
+            color: var(--pink);
         }
         
         /* Footer */
         footer {
             background-color: var(--dark);
             color: white;
-            padding: 3rem 5%;
-            text-align: center;
+            padding: 5rem 5% 2rem;
+            position: relative;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50%;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+        
+        .footer-column p {
+            margin-bottom: 1rem;
+            color: rgba(255,255,255,0.8);
         }
         
         .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 2rem 0;
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
         }
         
         .footer-links a {
-            color: white;
+            color: rgba(255,255,255,0.8);
             text-decoration: none;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            display: inline-block;
+            position: relative;
         }
         
         .footer-links a:hover {
             color: var(--secondary);
+            transform: translateX(-5px);
+        }
+        
+        .footer-links a::before {
+            content: '→';
+            position: absolute;
+            right: -20px;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+        
+        .footer-links a:hover::before {
+            right: -15px;
+            opacity: 1;
+        }
+        
+        .contact-info {
+            margin-top: 1.5rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .contact-item i {
+            margin-left: 1rem;
+            color: var(--secondary);
+            font-size: 1.2rem;
         }
         
         .social-icons {
-            font-size: 1.5rem;
-            margin: 1rem 0;
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
         }
         
         .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
             color: white;
-            margin: 0 0.5rem;
-            transition: color 0.3s;
+            font-size: 1.2rem;
+            transition: all 0.3s;
         }
         
         .social-icons a:hover {
-            color: var(--accent);
+            background-color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+        
+        .developer-info {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: rgba(0,0,0,0.2);
+            border-radius: 5px;
+            display: inline-block;
+        }
+        
+        .developer-info a {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .developer-info a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--pink);
+            transform: translateY(-5px);
         }
         
         /* Animations */
         @keyframes float-1 {
             0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
+            50% { transform: translateY(-30px) rotate(5deg); }
         }
         
         @keyframes float-2 {
             0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(-3deg); }
+            50% { transform: translateY(-25px) rotate(-3deg); }
         }
         
         @keyframes float-3 {
             0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-10px) scale(1.1); }
+            50% { transform: translateY(-20px) scale(1.1); }
+        }
+        
+        @keyframes float-shape-1 {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-50px) rotate(180deg); }
+            100% { transform: translateY(0) rotate(360deg); }
+        }
+        
+        @keyframes float-shape-2 {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-70px) rotate(-180deg); }
+            100% { transform: translateY(0) rotate(-360deg); }
+        }
+        
+        @keyframes float-shape-3 {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(20px, -40px) rotate(180deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+        
+        @keyframes float-shape-4 {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-20px, -60px) rotate(-180deg); }
+            100% { transform: translate(0, 0) rotate(-360deg); }
         }
         
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         /* Responsive Design */
-        @media (max-width: 768px) {
+        @media (max-width: 1200px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero p {
+                font-size: 1.3rem;
+            }
+        }
+        
+        @media (max-width: 992px) {
             .hero {
                 flex-direction: column;
                 text-align: center;
-                padding-top: 5rem;
+                padding-top: 6rem;
                 height: auto;
+                min-height: 100vh;
             }
             
+            .hero-content {
+                margin-bottom: 3rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .hero-images {
+                height: 500px;
+                margin-bottom: 3rem;
+            }
+            
+            .child-image {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                width: 80%;
+                height: calc(100vh - 80px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                transition: all 0.5s ease;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            nav.scrolled .nav-links {
+                top: 60px;
+                height: calc(100vh - 60px);
+            }
+        }
+        
+        @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.5rem;
             }
@@ -370,34 +982,71 @@
                 font-size: 1.2rem;
             }
             
-            .hero-images {
-                margin-top: 2rem;
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .testimonial-slider {
                 height: 400px;
             }
             
-            .nav-links {
-                display: none;
+            .testimonial {
+                padding: 2rem 1.5rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-images {
+                height: 400px;
             }
             
             .child-image {
-                width: 150px;
-                height: 150px;
+                width: 200px;
+                height: 200px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .feature-card, .program-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .enrollment-cta h2 {
+                font-size: 2.2rem;
+            }
+            
+            .enrollment-cta p {
+                font-size: 1.1rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav>
-        <div class="logo">
+    <nav id="navbar">
+        <a href="#home" class="logo">
             روضة النجوم الصغار <span>🌱</span>
-        </div>
-        <div class="nav-links">
+        </a>
+        <div class="nav-links" id="navLinks">
             <a href="#home">الرئيسية</a>
             <a href="#about">عن الروضة</a>
             <a href="#programs">البرامج</a>
-            <a href="enroll.html">التسجيل</a>
+            <a href="#gallery">معرض الصور</a>
+            <a href="#testimonials">آراء العملاء</a>
             <a href="#contact">اتصل بنا</a>
+        </div>
+        <div class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
         </div>
     </nav>
     
@@ -406,18 +1055,22 @@
         <div class="hero-content">
             <h1>حيث تبدأ عقول الصغار رحلتها نحو المستقبل</h1>
             <p>انضم إلى مغامرتنا التعليمية الساحرة للأطفال من عمر 2-5 سنوات. نرعى الفضول والإبداع والثقة من خلال التعلم القائم على اللعب.</p>
-             <button class="cta-button" onclick="window.location.href='enroll.html'">
-            <span>🚀</span> بدء التسجيل
-        </button>
+            <button class="cta-button" onclick="window.location.href='enroll.html'">
+                <span>🚀</span> بدء التسجيل
+            </button>
         </div>
         <div class="hero-images">
-            <!-- These are placeholder image URLs - replace with your actual images -->
-            <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="طفل يلعب" class="child-image child-1">
-            <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="أطفال يتعلمون" class="child-image child-2">
-            <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="مجموعة أطفال" class="child-image child-3">
+            <!-- Updated with src folder images -->
+            <img src="src/1.jpg" alt="أطفال يلعبون في الروضة" class="child-image child-1">
+            <img src="src/2.jpg" alt="أطفال يتعلمون مع المعلمة" class="child-image child-2">
+            <img src="src/3.jpg" alt="مجموعة أطفال في الروضة" class="child-image child-3">
         </div>
-        <div class="bg-element bg-1"></div>
-        <div class="bg-element bg-2"></div>
+        <div class="floating-elements">
+            <img src="https://img.icons8.com/ios-filled/50/FF9E3F/star.png" class="floating-element shape-1">
+            <img src="https://img.icons8.com/ios-filled/50/6BD5E1/hearts.png" class="floating-element shape-2">
+            <img src="https://img.icons8.com/ios-filled/50/6BD5E1/hearts.png" class="floating-element shape-3">
+            <img src="https://img.icons8.com/ios-filled/50/FF6B6B/square.png" class="floating-element shape-4">
+        </div>
     </section>
     
     <!-- Features Section -->
@@ -425,32 +1078,44 @@
         <h2 class="section-title">لماذا تختار روضتنا؟</h2>
         <div class="features-grid">
             <div class="feature-card">
-                <div class="feature-icon">🌈</div>
+                <div class="feature-icon-container">
+                    <div class="feature-icon">🌈</div>
+                </div>
                 <h3>التعلم من خلال اللعب</h3>
                 <p>منهجنا مصمم حول اللعب، الطريقة الأكثر طبيعية لتعلم الأطفال واستكشاف عالمهم.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">🧠</div>
+                <div class="feature-icon-container">
+                    <div class="feature-icon">🧠</div>
+                </div>
                 <h3>التنمية المبكرة</h3>
                 <p>نركز على التطور المعرفي والاجتماعي والعاطفي والجسدي من خلال أنشطة جذابة.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">❤️</div>
+                <div class="feature-icon-container">
+                    <div class="feature-icon">❤️</div>
+                </div>
                 <h3>بيئة داعمة</h3>
                 <p>معلماتنا الحنونات يخلقن مساحة دافئة وآمنة يشعر فيها الأطفال بالحب والدعم.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">🎯</div>
+                <div class="feature-icon-container">
+                    <div class="feature-icon">🎯</div>
+                </div>
                 <h3>اهتمام فردي</h3>
                 <p>فصول صغيرة الحجم تضمن حصول كل طفل على الاهتمام الشخصي الذي يحتاجه لينمو.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">🌍</div>
+                <div class="feature-icon-container">
+                    <div class="feature-icon">🌍</div>
+                </div>
                 <h3>مجتمع متنوع</h3>
                 <p>نحتفل بالتنوع ونعلم الأطفال عن العالم من حولهم.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">🍎</div>
+                <div class="feature-icon-container">
+                    <div class="feature-icon">🍎</div>
+                </div>
                 <h3>عادات صحية</h3>
                 <p>التعليم الغذائي والنشاط البدني متكاملان في روتيننا اليومي.</p>
             </div>
@@ -458,26 +1123,58 @@
     </section>
     
     <!-- Programs Section -->
-    <section class="features" id="programs" style="background-color: #f0f9ff;">
+    <section class="programs" id="programs">
         <h2 class="section-title">برامجنا</h2>
-        <div class="features-grid">
-            <div class="feature-card" style="background-color: #FFF2E6;">
-                <div class="feature-icon">🌟</div>
+        <div class="programs-grid">
+            <div class="program-card">
+                <div class="feature-icon-container">
+                    <div class="feature-icon">🌟</div>
+                </div>
                 <h3>البراعم الصغيرة (2-3 سنوات)</h3>
                 <p>مقدمة لطيفة للمدرسة مع التركيز على اللعب الحسي والمهارات الاجتماعية وتطور اللغة.</p>
-                <button class="cta-button" style="background-color: var(--primary); margin-top: 1rem;">المزيد من المعلومات</button>
+                <button class="cta-button" style="background-color: var(--pink); margin-top: 1rem;">المزيد من المعلومات</button>
             </div>
-            <div class="feature-card" style="background-color: #E6F7FF;">
-                <div class="feature-icon">🌱</div>
+            <div class="program-card">
+                <div class="feature-icon-container">
+                    <div class="feature-icon">🌱</div>
+                </div>
                 <h3>البراعم النامية (3-4 سنوات)</h3>
                 <p>بناء الاستقلالية من خلال اللعب المنظم، ومحو الأمية المبكرة، واستكشاف العلوم.</p>
                 <button class="cta-button" style="background-color: var(--secondary); margin-top: 1rem;">المزيد من المعلومات</button>
             </div>
-            <div class="feature-card" style="background-color: #F0FFF0;">
-                <div class="feature-icon">🌳</div>
+            <div class="program-card">
+                <div class="feature-icon-container">
+                    <div class="feature-icon">🌳</div>
+                </div>
                 <h3>البراعم المستعدة (4-5 سنوات)</h3>
                 <p>التحضير للمدرسة الابتدائية مع التركيز على الأسس الأكاديمية والمهارات الاجتماعية والعاطفية.</p>
                 <button class="cta-button" style="background-color: var(--green); margin-top: 1rem;">المزيد من المعلومات</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <h2 class="section-title">معرض الصور</h2>
+        <p style="max-width: 700px; margin: 0 auto 2rem; color: var(--dark-light); font-size: 1.2rem;">لحظات من الفرح والتعلم في روضتنا</p>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="src/4.jpg" alt="أطفال يلعبون في الفصل">
+            </div>
+            <div class="gallery-item">
+                <img src="src/5.jpg" alt="أنشطة تعليمية">
+            </div>
+            <div class="gallery-item">
+                <img src="src/6.jpg" alt="وقت القصة">
+            </div>
+            <div class="gallery-item">
+                <img src="src/7.jpg" alt="لعب خارجي">
+            </div>
+            <div class="gallery-item">
+                <img src="src/8.jpg" alt="أنشطة فنية">
+            </div>
+            <div class="gallery-item">
+                <img src="src/9.jpg" alt="أنشطة موسيقية">
             </div>
         </div>
     </section>
@@ -486,123 +1183,277 @@
     <section class="testimonials" id="testimonials">
         <h2 class="section-title">آراء أولياء الأمور</h2>
         <div class="testimonial-slider">
-            <div class="testimonial">
+            <div class="testimonial active">
+                <i class="fas fa-quote-left quote-icon"></i>
                 <p>"روضة النجوم الصغار كانت تحولية لابنتنا. لقد تطورت اجتماعياً ولا يمكنها الانتظار للذهاب إلى المدرسة كل صباح!"</p>
                 <div class="parent-info">
                     <div class="parent-avatar">👩</div>
-                    <div>
+                    <div class="parent-details">
                         <h4>سارة أحمد</h4>
                         <p>والدة ميا (4 سنوات)</p>
                     </div>
                 </div>
             </div>
+            <div class="testimonial">
+                <i class="fas fa-quote-left quote-icon"></i>
+                <p>"المعلمات رائعات! ابني اكتسب الكثير من الثقة ويأتي إلى المنزل متحمساً لمشاركة ما تعلمه."</p>
+                <div class="parent-info">
+                    <div class="parent-avatar">👨</div>
+                    <div class="parent-details">
+                        <h4>محمد خالد</h4>
+                        <p>والد يوسف (3 سنوات)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial">
+                <i class="fas fa-quote-left quote-icon"></i>
+                <p>"لقد نظرنا في عدة روضات وروضة النجوم الصغار تميزت بمنهجها الإبداعي في التعليم المبكر."</p>
+                <div class="parent-info">
+                    <div class="parent-avatar">👩</div>
+                    <div class="parent-details">
+                        <h4>نورا سليم</h4>
+                        <p>والدة لين (5 سنوات)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial-dots">
+            <div class="dot active" data-index="0"></div>
+            <div class="dot" data-index="1"></div>
+            <div class="dot" data-index="2"></div>
         </div>
     </section>
     
     <!-- Enrollment CTA -->
-    <section class="features" id="enroll" style="text-align: center; padding: 4rem 5%;">
-        <h2 class="section-title">هل أنت مستعد للانضمام إلى مجتمعنا؟</h2>
-        <p style="font-size: 1.3rem; max-width: 700px; margin: 0 auto 2rem;">أماكن محدودة متاحة للعام الدراسي 2023-2024. ابدأ رحلة طفلك التعليمية الساحرة اليوم!</p>
-        <button class="cta-button" style="font-size: 1.5rem; padding: 1.2rem 3rem;" onclick="window.location.href='enroll.html'">
-        <span>✨</span> سجل الآن
-    </button>
+    <section class="enrollment-cta" id="enroll">
+        <h2>هل أنت مستعد للانضمام إلى مجتمعنا؟</h2>
+        <p>أماكن محدودة متاحة للعام الدراسي 2025-2026. ابدأ رحلة طفلك التعليمية الساحرة اليوم!</p>
+        <button class="cta-button" onclick="window.location.href='enroll.html'">
+            <span>✨</span> سجل الآن
+        </button>
     </section>
     
     <!-- Footer -->
     <footer id="contact">
-        <div class="logo" style="color: white; justify-content: center;">روضة النجوم الصغار <span>🌱</span></div>
-        <div class="footer-links">
-            <a href="#about">عن الروضة</a>
-            <a href="#programs">البرامج</a>
-            <a href="#testimonials">آراء العملاء</a>
-            <a href="enroll.html">التسجيل</a>
-            <a href="#contact">اتصل بنا</a>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>روضة النجوم الصغار</h3>
+                <p>نحن نؤمن بأن كل طفل هو نجم صغير ينتظر أن يضيء. مهمتنا هي توفير البيئة المثالية لنموهم وتطورهم.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>روابط سريعة</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">الرئيسية</a></li>
+                    <li><a href="#about">عن الروضة</a></li>
+                    <li><a href="#programs">البرامج</a></li>
+                    <li><a href="#gallery">معرض الصور</a></li>
+                    <li><a href="#testimonials">آراء العملاء</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>ساعات العمل</h3>
+                <p>الأحد - الخميس: 7:30 ص - 3:30 م</p>
+                <p>الجمعة - السبت: مغلق</p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>123 شارع سي الحواس</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>0549765903</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>mmourksi79@gmail.com</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="social-icons">
-            <a href="#">📱</a>
-            <a href="#">💻</a>
-            <a href="#">📧</a>
-            <a href="#">📞</a>
+        <div class="footer-bottom">
+            <p>&copy; 2025 روضة النجوم الصغار. جميع الحقوق محفوظة.</p>
+            <div class="developer-info">
+                <p>تم التطوير بواسطة: <a href="mailto:mmourksi79@gmail.com">Mourksi El Moatassam</a> | <a href="tel:+213549765903">+213 549 765 903</a></p>
+            </div>
         </div>
-        <p>123 شارع التعلم، مدينة المعرفة | 555 123 4567 | info@nujum.edu</p>
-        <p>© 2023 روضة النجوم الصغار. جميع الحقوق محفوظة.</p>
     </footer>
+    
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Animate images on scroll
-            const images = document.querySelectorAll('.child-image');
+            // Navbar scroll effect
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
             
-            function checkScroll() {
-                images.forEach(image => {
-                    const imagePosition = image.getBoundingClientRect().top;
-                    const screenPosition = window.innerHeight / 1.3;
-                    
-                    if (imagePosition < screenPosition) {
-                        image.style.opacity = '1';
-                    }
-                });
-            }
+            // Mobile menu toggle
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('navLinks');
             
-            window.addEventListener('scroll', checkScroll);
-            checkScroll(); // Check on load
+            hamburger.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                hamburger.innerHTML = navLinks.classList.contains('active') ? 
+                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            });
             
-            // Enrollment button interaction
-           /* const enrollButtons = document.querySelectorAll('.cta-button');
-            enrollButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    alert("مرحباً بكم في روضة النجوم الصغار! سيفتح نظام التسجيل في نافذة جديدة.");
-                    button.innerHTML = "<span>⏳</span> جاري التوجيه...";
-                    setTimeout(() => {
-                        button.innerHTML = "<span>🚀</span> بدء التسجيل";
-                    }, 2000);
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                    hamburger.innerHTML = '<i class="fas fa-bars"></i>';
                 });
             });
-            */
-            // Simple testimonial slider
-            const testimonials = [
-                {
-                    quote: "روضة النجوم الصغار كانت تحولية لابنتنا. لقد تطورت اجتماعياً ولا يمكنها الانتظار للذهاب إلى المدرسة كل صباح!",
-                    avatar: "👩",
-                    name: "سارة أحمد",
-                    child: "والدة ميا (4 سنوات)"
-                },
-                {
-                    quote: "المعلمات رائعات! ابني اكتسب الكثير من الثقة ويأتي إلى المنزل متحمساً لمشاركة ما تعلمه.",
-                    avatar: "👨",
-                    name: "محمد خالد",
-                    child: "والد يوسف (3 سنوات)"
-                },
-                {
-                    quote: "لقد نظرنا في عدة روضات وروضة النجوم الصغار تميزت بمنهجها الإبداعي في التعليم المبكر.",
-                    avatar: "👩",
-                    name: "نورا سليم",
-                    child: "والدة لين (5 سنوات)"
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Back to top button
+            const backToTopButton = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
                 }
-            ];
+            });
             
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Testimonial slider
+            const testimonials = document.querySelectorAll('.testimonial');
+            const dots = document.querySelectorAll('.dot');
             let currentTestimonial = 0;
-            const testimonialElement = document.querySelector('.testimonial');
-            const parentAvatar = document.querySelector('.parent-avatar');
-            const parentName = testimonialElement.querySelector('h4');
-            const parentChild = testimonialElement.querySelector('p:last-child');
             
-            function rotateTestimonial() {
-                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-                const testimonial = testimonials[currentTestimonial];
+            function showTestimonial(index) {
+                testimonials.forEach(testimonial => testimonial.classList.remove('active'));
+                dots.forEach(dot => dot.classList.remove('active'));
                 
-                testimonialElement.style.animation = 'none';
-                testimonialElement.offsetHeight; // Trigger reflow
-                testimonialElement.style.animation = 'fadeIn 1s';
-                
-                testimonialElement.querySelector('p:first-child').textContent = testimonial.quote;
-                parentAvatar.textContent = testimonial.avatar;
-                parentName.textContent = testimonial.name;
-                parentChild.textContent = testimonial.child;
+                testimonials[index].classList.add('active');
+                dots[index].classList.add('active');
+                currentTestimonial = index;
             }
             
-            // Rotate every 5 seconds
-            setInterval(rotateTestimonial, 5000);
+            dots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    showTestimonial(index);
+                });
+            });
+            
+            // Auto rotate testimonials
+            setInterval(() => {
+                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+                showTestimonial(currentTestimonial);
+            }, 5000);
+            
+            // Enhanced animations for children elements
+            const childImages = document.querySelectorAll('.child-image');
+            childImages.forEach((img, index) => {
+                // Add initial animation delay
+                img.style.animationDelay = `${index * 0.2}s`;
+                
+                // Add interactive hover effect
+                img.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.05) rotate(5deg)';
+                    this.style.boxShadow = '0 20px 40px rgba(0,0,0,0.3)';
+                });
+                
+                img.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                    this.style.boxShadow = '0 15px 30px rgba(0,0,0,0.2)';
+                });
+            });
+            
+            // Feature cards interactive animation
+            const featureCards = document.querySelectorAll('.feature-card');
+            featureCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    const icon = this.querySelector('.feature-icon');
+                    icon.style.animation = 'bounce 0.5s 3';
+                });
+            });
+            
+            // Animate elements on scroll
+            const animateOnScroll = function() {
+                const elements = document.querySelectorAll('.feature-card, .program-card, .gallery-item');
+                
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.3;
+                    
+                    if (elementPosition < screenPosition) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }
+                });
+            };
+            
+            // Set initial state for animated elements
+            document.querySelectorAll('.feature-card, .program-card, .gallery-item').forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(30px)';
+                element.style.transition = 'all 0.6s ease';
+            });
+            
+            window.addEventListener('scroll', animateOnScroll);
+            animateOnScroll(); // Run once on load
+            
+            // Button hover effects
+            const buttons = document.querySelectorAll('.cta-button');
+            buttons.forEach(button => {
+                button.addEventListener('mousemove', function(e) {
+                    const x = e.pageX - this.offsetLeft;
+                    const y = e.pageY - this.offsetTop;
+                    
+                    this.style.setProperty('--x', x + 'px');
+                    this.style.setProperty('--y', y + 'px');
+                });
+            });
+            
+            // Gallery item hover effect
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            galleryItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.querySelector('img').style.transform = 'scale(1.1)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.querySelector('img').style.transform = 'scale(1)';
+                });
+            });
         });
     </script>
 </body>
