@@ -9,11 +9,11 @@
     <style>
         /* Base Styles & "Wow" Variables */
         :root {
-            --primary: #FF8C42; /* A warmer, more vibrant orange */
-            --secondary: #3FC1C9; /* A playful turquoise */
+            --primary: #FF8C42;
+            --secondary: #3FC1C9;
             --accent: #FFD166;
             --dark: #2B2D42;
-            --light: #FDFCFF; /* A cleaner, brighter white */
+            --light: #FDFCFF;
             --pink: #FF6B6B;
             --green: #06D6A0;
 
@@ -41,7 +41,7 @@
             line-height: 1.7;
         }
 
-        /* WOW: Glassmorphism Navigation */
+        /* Navigation */
         nav {
             background-color: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(12px);
@@ -73,14 +73,14 @@
         .nav-links a::after { content: ''; position: absolute; bottom: -5px; right: 50%; transform: translateX(50%); width: 0; height: 3px; background: linear-gradient(90deg, var(--primary), var(--secondary)); transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1); border-radius: 3px; }
         .nav-links a:hover::after { width: 110%; }
         
-        /* WOW: Morphing Hamburger Icon */
-        .hamburger { display: none; cursor: pointer; z-index: 1001; background: none; border: none; padding: 10px; }
+        /* Hamburger Menu */
+        .hamburger { display: none; cursor: pointer; z-index: 1002; background: none; border: none; padding: 10px; }
         .hamburger .bar { display: block; width: 25px; height: 3px; margin: 5px auto; background-color: var(--dark); border-radius: 3px; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); }
         .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
         .hamburger.active .bar:nth-child(2) { opacity: 0; }
         .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
         
-        /* ---- MODIFICATION: Animated Gradient Hero Section ---- */
+        /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -103,7 +103,7 @@
         }
         .hero h1 { font-size: 2.8rem; margin: 0; color: var(--dark); line-height: 1.3; text-shadow: 2px 2px 10px rgba(0,0,0,0.05); animation-delay: 0.2s; }
         .hero h1 span { color: var(--primary); }
-        .hero p { font-size: 1.3rem; max-width: 600px; margin: 1.5rem auto; color: var(--dark-light); animation-delay: 0.4s; }
+        .hero p { font-size: 1.3rem; max-width: 600px; margin: 1.5rem auto; color: #555; animation-delay: 0.4s; }
         
         .cta-button {
             background: linear-gradient(45deg, var(--pink), var(--primary));
@@ -117,11 +117,7 @@
         }
         .cta-button .icon { font-size: 1.6rem; display: inline-block; transition: transform 0.4s ease; }
         .cta-button:hover { transform: translateY(-8px) scale(1.05); box-shadow: 0 10px 25px rgba(255, 107, 107, 0.5); }
-        .cta-button:hover .icon { transform: rotate(20deg) scale(1.1); }
-        .cta-button:active { transform: translateY(-2px) scale(1.02); }
-        .cta-button::before { content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; background: rgba(255,255,255,0.3); border-radius: 50%; transform: translate(-50%, -50%); transition: width 0.5s, height 0.5s; opacity: 0; }
-        .cta-button:active::before { width: 300px; height: 300px; opacity: 1; transition: 0s; }
-
+        
         .hero-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
         .hero-background .shape { position: absolute; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1); }
         
@@ -141,7 +137,6 @@
             width: 100%; height: 100%; object-fit: cover;
             border-radius: 12px; display: block;
         }
-        /* ---- MODIFICATION: Repositioned frames to accommodate a third image ---- */
         .frame-1 {
             width: 230px; height: 230px; top: 55%; left: 15%;
             transform: rotate(-10deg); animation-delay: -2s;
@@ -150,7 +145,6 @@
             width: 200px; height: 200px; top: 18%; left: 80%;
             transform: rotate(12deg);
         }
-        /* ---- MODIFICATION: Added the third image frame ---- */
         .frame-3 {
             width: 180px; height: 180px; top: 50%; left: 65%;
             transform: rotate(5deg); animation-delay: -4s;
@@ -180,7 +174,7 @@
         .program-card-image { width: 100%; height: 200px; object-fit: cover; }
         .program-card-content { padding: 2rem; }
         .program-card h3 { font-size: 1.6rem; color: var(--dark); margin-bottom: 1rem; }
-        .program-card p { color: var(--dark-light); margin-bottom: 2rem; }
+        .program-card p { color: #555; margin-bottom: 2rem; }
 
         .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
         .gallery-item { position: relative; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-elevation-low); height: 250px; transition: all 0.5s ease; opacity: 0; }
@@ -228,7 +222,7 @@
         .wave-divider { position: relative; bottom: -5px; z-index: 5; }
         .wave-divider svg .shape-fill { fill: var(--light); }
         
-        footer { background-color: #f7f8fc; color: var(--dark-light); padding: 8rem 5% 2rem; margin-top: -5rem; position: relative; z-index: -1; text-align: center; }
+        footer { background-color: #f7f8fc; color: #555; padding: 8rem 5% 2rem; margin-top: -5rem; position: relative; z-index: -1; text-align: center; }
         .footer-content { max-width: 400px; margin: 0 auto 3rem; }
         .footer h3 { font-size: 2rem; color: var(--dark); font-weight: 900; margin-bottom: 1rem; }
         .social-icons { display: flex; gap: 1.5rem; margin-top: 1.5rem; justify-content: center; }
@@ -241,11 +235,11 @@
         .back-to-top.visible { opacity: 1; visibility: visible; transform: scale(1); }
         .back-to-top:hover { background-color: var(--pink); transform: scale(1.1) rotate(10deg); }
         
-        /* WOW: Keyframe Animations */
+        /* Keyframe Animations */
         @keyframes float-1 { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-30px) rotate(15deg); } }
         @keyframes float-2 { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-25px) rotate(-10deg); } }
         @keyframes float-3 { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-20px) scale(1.05); } }
-        @keyframes float-4 { 0%, 100% { transform: translate(0, 0) rotate(0deg); } 50% { transform: translate(-15px, -35px) rotate(-180deg); } 100% { transform: translate(0, 0) rotate(-360deg); } }
+        @keyframes float-4 { 0%, 100% { transform: translate(0, 0) rotate(0deg); } 50% { transform: translate(-15px, -35px) rotate(-180deg); } }
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); filter: brightness(1.2); } }
         @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
         @keyframes photo-bob { 0%, 100% { transform: translateY(0) rotate(var(--initial-rotate, 0deg)); } 50% { transform: translateY(-20px) rotate(var(--initial-rotate, 0deg)); } }
@@ -255,32 +249,27 @@
         @keyframes move-blob { from { transform: translate(0, 0) rotate(0deg) scale(1); } to { transform: translate(40px, -20px) rotate(180deg) scale(1.2); } }
         @keyframes animateGradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         
-        /* ------------------------- */
-        /* WOW: RESPONSIVE DESIGN    */
-        /* ------------------------- */
-        
-        @media (min-width: 768px) {
-            .hero { flex-direction: row; text-align: right; justify-content: space-between; gap: 3rem; }
-            .hero-content { flex: 0 0 50%; max-width: 50%; text-align: right; }
-            .hero-background-container { flex: 0 0 50%; max-width: 50%; position: relative; height: 100vh; }
-            .hero h1 { font-size: 3.8rem; }
-        }
-        
+        /* --- FIX: Corrected Mobile Menu Styles --- */
         @media (max-width: 767px) {
             .hamburger { display: block; }
             .nav-links {
-                position: fixed; top: 0; right: 0; width: 100%; height: 100%;
-                background-color: rgba(253, 252, 255, 0.95);
+                position: fixed;
+                top: 0;
+                right: -100%; /* Start off-screen */
+                width: 70%;
+                height: 100%;
+                background-color: rgba(253, 252, 255, 0.98);
                 backdrop-filter: blur(10px);
-                flex-direction: column; align-items: center; justify-content: center;
+                -webkit-backdrop-filter: blur(10px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
                 gap: 2.5rem;
-                transition: clip-path 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-                clip-path: circle(20px at calc(100% - 50px) 50px);
-                transform: scale(0);
+                z-index: 1001;
+                transition: right 0.5s cubic-bezier(0.23, 1, 0.32, 1);
             }
             .nav-links.active {
-                clip-path: circle(150% at calc(100% - 50px) 50px);
-                transform: scale(1);
+                right: 0; /* Slide in */
             }
             .nav-links a { font-size: 2rem; transform: translateY(20px); opacity: 0; transition: transform 0.5s, opacity 0.5s; transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1); }
             .nav-links.active a { transform: translateY(0); opacity: 1; }
@@ -300,20 +289,20 @@
             .enrollment-section-wrapper { margin-top: 4rem; padding: 0 3%; }
             .enrollment-cta { padding: 4rem 1.5rem; border-radius: 30px; }
             .enrollment-cta h2 { font-size: 2rem; }
-            .wave-divider svg .shape-fill { fill: #FDFCFF; } /* Ensure wave matches body on mobile */
+            .wave-divider svg .shape-fill { fill: #FDFCFF; }
         }
     </style>
 </head>
 <body>
     <nav id="navbar">
-        <a href="#home" class="logo">النجوم الصغار <span>🌟</span></a>
+        <a href="index.html" class="logo">النجوم الصغار <span>🌟</span></a>
         <div class="nav-links" id="navLinks">
             <a href="#home">الرئيسية</a>
             <a href="#about">عن الروضة</a>
             <a href="#programs">البرامج</a>
             <a href="#gallery">معرض الصور</a>
             <a href="#testimonials">آراء العملاء</a>
-            <a href="#enroll">التسجيل</a>
+            <a href="enroll.html">التسجيل</a>
         </div>
         <button class="hamburger" id="hamburger" aria-label="Toggle menu">
             <span class="bar"></span><span class="bar"></span><span class="bar"></span>
@@ -325,12 +314,13 @@
             <div class="hero-content">
                 <h1>مكان يضيء فيه كل <span>نجم صغير</span></h1>
                 <p>انضموا إلى مغامرتنا التعليمية الساحرة. نرعى الفضول والإبداع والثقة من خلال التعلم القائم على اللعب والمرح.</p>
-                <a href="#enroll" class="cta-button">
+                <a href="enroll.html" class="cta-button">
                     <span class="icon">🚀</span> ابدأ رحلتك
                 </a>
             </div>
             <div class="hero-background-container">
                 <div class="hero-background" id="hero-bg">
+                    <!-- Icons -->
                     <img src="https://img.icons8.com/plasticine/100/000000/star.png" class="shape shape-1" alt="star icon" data-depth="0.3">
                     <img src="https://img.icons8.com/clouds/100/000000/rocket.png" class="shape shape-4" alt="rocket icon" data-depth="0.8">
                     <img src="https://img.icons8.com/plasticine/100/sun.png" class="shape shape-5" alt="sun icon" data-depth="0.2">
@@ -338,6 +328,7 @@
                     <img src="https://img.icons8.com/plasticine/100/book.png" class="shape shape-7" alt="book icon" data-depth="0.4">
                     <img src="https://img.icons8.com/clouds/100/cloud.png" class="shape shape-8" alt="cloud icon" data-depth="0.6">
 
+                    <!-- Framed Photos -->
                     <div class="hero-image-frame frame-1">
                         <img src="src/2.jpg" alt="أطفال يتعلمون">
                     </div>
@@ -440,7 +431,7 @@
                 <div class="cta-content">
                     <h2>هل أنتم مستعدون للانضمام؟</h2>
                     <p>المقاعد محدودة! أمنوا مكان طفلكم في رحلة تعليمية لا تنسى.</p>
-                    <button class="cta-button"><span>✨</span> سجل الآن</button>
+                    <a href="enroll.html" class="cta-button"><span>✨</span> سجل الآن</a>
                 </div>
             </section>
         </div>
@@ -477,7 +468,7 @@
 
         const heroBg = document.getElementById('hero-bg');
         window.addEventListener('mousemove', (e) => {
-            if (window.innerWidth < 768) return; // Disable parallax on mobile
+            if (window.innerWidth < 768) return;
             const { clientX, clientY } = e;
             const x = (clientX / window.innerWidth - 0.5) * 2;
             const y = (clientY / window.innerHeight - 0.5) * 2;
@@ -487,13 +478,16 @@
             });
         });
 
+        // Hamburger Menu Toggle Logic
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('navLinks');
         const navLinkItems = navLinks.querySelectorAll('a');
+        
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
             navLinks.classList.toggle('active');
         });
+
         navLinkItems.forEach(link => link.addEventListener('click', () => {
             if (navLinks.classList.contains('active')) {
                 hamburger.classList.remove('active');
