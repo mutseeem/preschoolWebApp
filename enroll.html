@@ -76,13 +76,18 @@
         .modal.success { background-color: var(--green); }
         .modal.error { background-color: var(--pink); }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        
         @media (max-width: 767px) {
             .main-container { padding: 90px 1rem 2rem; }
             .form-container { padding: 2rem 1.5rem; }
             .form-title { font-size: 2rem; }
             .enroll-form { grid-template-columns: 1fr; gap: 1.2rem; }
-            .logo-text { display: none; }
-            .logo { height: 50px; }
+            
+            /* --- FIX STARTS HERE --- */
+            .logo-text { font-size: 1rem; margin-right: 0.5rem; } /* The rule hiding this was removed, and this was added */
+            .logo { height: 40px; } /* Adjusted logo size for mobile */
+            /* --- FIX ENDS HERE --- */
+
             .hamburger { display: block; }
             .nav-links {
                 position: fixed; top: 0; right: 0; transform: translateX(100%);
@@ -198,17 +203,17 @@
                 setTimeout(() => { modal.classList.remove('show'); }, 4000);
             }
 
-            emailjs.init("YOUR_EMAILJS_USER_ID"); // IMPORTANT: Replace with your actual EmailJS User ID
+            // Note: You still need to replace these with your actual EmailJS IDs
+            emailjs.init("YOUR_EMAILJS_USER_ID"); 
 
             enrollmentForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 submitButton.disabled = true;
                 submitButton.innerHTML = '<span>⏳</span> جاري الإرسال...';
                 
-                // These are the IDs from your EmailJS account
                 const serviceID = 'YOUR_SERVICE_ID';
-                const confirmationTemplateID = 'YOUR_CONFIRMATION_TEMPLATE_ID'; // To parent
-                const notificationTemplateID = 'YOUR_NOTIFICATION_TEMPLATE_ID'; // To you
+                const confirmationTemplateID = 'YOUR_CONFIRMATION_TEMPLATE_ID';
+                const notificationTemplateID = 'YOUR_NOTIFICATION_TEMPLATE_ID';
 
                 const formData = {
                     fatherFirstName: this.fatherFirstName.value,
@@ -223,13 +228,11 @@
                     healthProblemDetails: this.healthProblemDetails?.value || "لا يوجد"
                 };
 
-                // Send confirmation email to the parent
                 emailjs.send(serviceID, confirmationTemplateID, {
                     fatherFirstName: formData.fatherFirstName,
                     childName: formData.childName,
                     email: formData.parentEmail
                 }).then(() => {
-                    // Send notification email to yourself
                     return emailjs.send(serviceID, notificationTemplateID, formData);
                 }).then(() => {
                     showNotification("✅ تم إرسال طلبك بنجاح! سنتواصل معك قريباً.", 'success');
