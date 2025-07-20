@@ -119,7 +119,15 @@
         .wave-divider svg .shape-fill { fill: var(--light); }
         
         /* Footer Styles */
-        footer { background-color: #f7f8fc; color: #555; padding: 8rem 5% 2rem; margin-top: -5rem; position: relative; z-index: -1; text-align: center; }
+        /* IMPORTANT FIX: Removed z-index: -1; from the footer */
+        footer { 
+            background-color: #f7f8fc; 
+            color: #555; 
+            padding: 8rem 5% 2rem; 
+            margin-top: -5rem; 
+            position: relative; 
+            text-align: center; 
+        }
         .footer-content { max-width: 400px; margin: 0 auto 3rem; }
         .footer-content h3 { font-size: 2rem; color: var(--dark); font-weight: 900; margin-bottom: 1rem; }
         .footer-content p { margin-bottom: 1.5rem; }
@@ -139,6 +147,8 @@
             transition: all 0.3s ease;
             box-shadow: 0 8px 15px rgba(0,0,0,0.15);
             border: 2px solid white;
+            position: relative; /* Added for z-index context */
+            z-index: 1; /* Ensure icons are clickable */
         }
         .social-icons a:hover {
             transform: translateY(-5px) scale(1.1);
@@ -176,8 +186,8 @@
             .hero-image-frame { display: none; }
         }
         @media (max-width: 767px) {
-            .logo-text { display: none; }
-            .logo { height: 50px; }
+            .logo-text { font-size: 1rem; margin-right: 0.5rem;}
+            .logo { height: 40px; }
             .hamburger { display: block; }
             .nav-links {
                 position: fixed; top: 0; right: 0; transform: translateX(100%);
