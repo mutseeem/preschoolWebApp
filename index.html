@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>روضة أطفال النجوم الصغار - عالم من العجائب</title>
+    <title>روضة براعم بوصلة العلوم - عالم من العجائب</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #FF8C42; --secondary: #3FC1C9; --accent: #FFD166;
             --dark: #2B2D42; --light: #FDFCFF; --pink: #FF6B6B; --green: #06D6A0;
+            --facebook-blue: #1877F2; --whatsapp-green: #25D366; --google-red: #D44638;
             --shadow-color: 220, 40%, 90%;
             --shadow-elevation-low: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.34), 0.4px 0.8px 1px -1.2px hsl(var(--shadow-color) / 0.34), 1px 2px 2.5px -2.5px hsl(var(--shadow-color) / 0.34);
             --shadow-elevation-medium: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.36), 0.8px 1.6px 2px -0.8px hsl(var(--shadow-color) / 0.36), 2.1px 4.1px 5.2px -1.7px hsl(var(--shadow-color) / 0.36), 5px 10px 12.6px -2.5px hsl(var(--shadow-color) / 0.36);
@@ -22,15 +23,17 @@
         }
         nav {
             background-color: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px); padding: 1rem 5%; display: flex;
+            -webkit-backdrop-filter: blur(12px); padding: 0.5rem 5%; display: flex;
             justify-content: space-between; align-items: center; position: fixed;
             width: 100%; top: 0; z-index: 1000; transition: all 0.4s ease;
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
         nav.scrolled { box-shadow: var(--shadow-elevation-medium); background-color: rgba(255, 255, 255, 0.85); }
-        .logo { font-size: 1.8rem; color: var(--primary); display: flex; align-items: center; font-weight: 900; text-decoration: none; transition: all 0.3s; }
-        .logo:hover { transform: scale(1.05); filter: brightness(1.1); }
-        .logo span { font-size: 1.5rem; margin-left: 0.5rem; animation: pulse 2s infinite; }
+        .logo-link { display: flex; align-items: center; text-decoration: none; }
+        .logo { height: 60px; width: auto; transition: transform 0.3s ease; }
+        .logo-link:hover .logo { transform: scale(1.1); }
+        .logo-text { font-size: 1.6rem; color: var(--primary); font-weight: 900; margin-right: 1rem; }
+
         .nav-links { display: flex; gap: 2.5rem; list-style: none; }
         .nav-links a { text-decoration: none; color: var(--dark); font-weight: 700; font-size: 1.1rem; transition: all 0.3s; position: relative; padding: 0.5rem 0; }
         .nav-links a:hover { color: var(--primary); transform: translateY(-3px); }
@@ -58,28 +61,32 @@
         .shape-6 { top: 75%; left: 5%; width: 85px; animation: float-3 19s infinite linear; }
         .shape-7 { top: 50%; left: 90%; width: 75px; animation: float-1 16s infinite linear reverse; }
         .shape-8 { top: 5%; left: 65%; width: 100px; animation: float-2 28s infinite linear; }
-        .hero-image-frame { position: absolute; padding: 15px; background: white; box-shadow: 0 10px 30px rgba(43, 45, 66, 0.15); border-radius: 20px; animation: photo-bob 8s infinite ease-in-out; }
+        .hero-image-frame { position: absolute; padding: 10px; background: white; box-shadow: 0 10px 30px rgba(43, 45, 66, 0.15); border-radius: 20px; animation: photo-float-sway 12s infinite ease-in-out; }
         .hero-image-frame img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; display: block; }
-        .frame-1 { width: 230px; height: 230px; top: 55%; left: 15%; transform: rotate(-10deg); animation-delay: -2s; }
-        .frame-2 { width: 200px; height: 200px; top: 18%; left: 80%; transform: rotate(12deg); }
-        .frame-3 { width: 180px; height: 180px; top: 50%; left: 65%; transform: rotate(5deg); animation-delay: -4s; }
+        .frame-1 { width: 200px; height: 200px; top: 58%; left: 12%; --initial-rotate: -12deg; animation-duration: 13s; }
+        .frame-2 { width: 170px; height: 170px; top: 18%; left: 78%; --initial-rotate: 10deg; animation-duration: 11s; animation-delay: -2s; }
+        .frame-3 { width: 150px; height: 150px; top: 45%; left: 65%; --initial-rotate: 5deg; animation-duration: 14s; animation-delay: -4s; }
+        .frame-4 { width: 160px; height: 160px; top: 15%; left: 20%; --initial-rotate: 8deg; animation-duration: 12s; animation-delay: -6s; }
+        .frame-5 { width: 180px; height: 180px; top: 75%; left: 85%; --initial-rotate: -9deg; animation-duration: 15s; animation-delay: -8s; }
+        .frame-6 { width: 140px; height: 140px; top: 60%; left: 40%; --initial-rotate: 15deg; animation-duration: 10s; animation-delay: -10s; }
         .section { padding: 6rem 5%; position: relative; overflow: hidden; }
         .section-title { text-align: center; font-size: 2.8rem; font-weight: 900; margin-bottom: 4rem; color: var(--dark); position: relative; }
         .section-title::after { content: '✨'; color: var(--primary); font-size: 1.5rem; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); }
-        .features-grid, .programs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .programs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
         .feature-card { background-color: white; border-radius: 25px; padding: 2.5rem 2rem; box-shadow: var(--shadow-elevation-low); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-align: center; position: relative; border: 1px solid #f0f0f0; opacity: 0; }
         .feature-card:hover { transform: translateY(-15px) scale(1.03); box-shadow: var(--shadow-elevation-medium); }
         .feature-icon-container { width: 90px; height: 90px; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; border-radius: 30px; background: linear-gradient(135deg, var(--primary), var(--pink)); box-shadow: 0 10px 20px rgba(255,107,107,0.3); transition: all 0.5s; transform: rotate(-10deg); }
         .feature-card:hover .feature-icon-container { transform: rotate(10deg) scale(1.15); border-radius: 50%; }
         .feature-icon { font-size: 3rem; color: white; }
         .feature-card h3 { font-size: 1.5rem; margin: 1rem 0; color: var(--dark); }
-        .program-card { text-align: center; background: white; border-radius: 25px; box-shadow: var(--shadow-elevation-low); overflow: hidden; transition: all 0.4s ease; opacity: 0; }
+        .program-card { text-align: center; background: white; border-radius: 25px; box-shadow: var(--shadow-elevation-low); overflow: hidden; transition: all 0.4s ease; opacity: 0; display: flex; flex-direction: column; }
         .program-card:hover { transform: translateY(-15px); box-shadow: var(--shadow-elevation-medium); }
-        .program-card-image { width: 100%; height: 200px; object-fit: cover; }
-        .program-card-content { padding: 2rem; }
-        .program-card h3 { font-size: 1.6rem; color: var(--dark); margin-bottom: 1rem; }
-        .program-card p { color: #555; margin-bottom: 2rem; }
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+        .program-card-image { width: 100%; height: 220px; object-fit: cover; }
+        .program-card-content { padding: 1.5rem; flex-grow: 1; }
+        .program-card h3 { font-size: 1.5rem; color: var(--dark); margin-bottom: 0.5rem; }
+        .program-card p { color: #555; margin-bottom: 1rem; font-size: 1rem; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; }
         .gallery-item { position: relative; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-elevation-low); height: 250px; transition: all 0.5s ease; opacity: 0; }
         .gallery-item:hover { transform: scale(1.05); box-shadow: var(--shadow-elevation-medium); z-index: 10; }
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: all 0.5s ease-out; }
@@ -110,29 +117,67 @@
         .blob-2 { width: 300px; height: 300px; bottom: -100px; left: -100px; animation-delay: -5s; animation-duration: 25s; }
         .wave-divider { position: relative; bottom: -5px; z-index: 5; }
         .wave-divider svg .shape-fill { fill: var(--light); }
+        
+        /* Footer Styles */
         footer { background-color: #f7f8fc; color: #555; padding: 8rem 5% 2rem; margin-top: -5rem; position: relative; z-index: -1; text-align: center; }
         .footer-content { max-width: 400px; margin: 0 auto 3rem; }
-        .footer h3 { font-size: 2rem; color: var(--dark); font-weight: 900; margin-bottom: 1rem; }
+        .footer-content h3 { font-size: 2rem; color: var(--dark); font-weight: 900; margin-bottom: 1rem; }
+        .footer-content p { margin-bottom: 1.5rem; }
         .social-icons { display: flex; gap: 1.5rem; margin-top: 1.5rem; justify-content: center; }
-        .social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 45px; height: 45px; background-color: white; border-radius: 50%; color: var(--dark); font-size: 1.2rem; text-decoration: none; transition: all 0.3s; box-shadow: var(--shadow-elevation-low); }
-        .social-icons a:hover { background-color: var(--primary); color: white; transform: translateY(-5px) scale(1.1); box-shadow: var(--shadow-elevation-medium); }
+        
+        /* Colorful Button Styles */
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.6rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+            border: 2px solid white;
+        }
+        .social-icons a:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+        }
+        .social-icons a[aria-label="Facebook"] { background-color: var(--facebook-blue); }
+        .social-icons a[aria-label="WhatsApp"] { background-color: var(--whatsapp-green); }
+        .social-icons a[aria-label="Email"] { background-color: var(--google-red); }
+
         .footer-bottom { padding-top: 2rem; border-top: 1px solid #e5e5e5; font-size: 0.9rem; }
         .footer-bottom a { color: var(--primary); text-decoration: none; font-weight: 700; }
         .back-to-top { position: fixed; bottom: 25px; right: 25px; width: 50px; height: 50px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.4s ease; z-index: 999; box-shadow: var(--shadow-elevation-medium); border: none; }
         .back-to-top.visible { opacity: 1; visibility: visible; transform: scale(1); }
         .back-to-top:hover { background-color: var(--pink); transform: scale(1.1) rotate(10deg); }
+        
+        /* Keyframe Animations */
         @keyframes float-1 { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-30px) rotate(15deg); } }
         @keyframes float-2 { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-25px) rotate(-10deg); } }
         @keyframes float-3 { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-20px) scale(1.05); } }
         @keyframes float-4 { 0%, 100% { transform: translate(0, 0) rotate(0deg); } 50% { transform: translate(-15px, -35px) rotate(-180deg); } }
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); filter: brightness(1.2); } }
         @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
-        @keyframes photo-bob { 0%, 100% { transform: translateY(0) rotate(var(--initial-rotate, 0deg)); } 50% { transform: translateY(-20px) rotate(var(--initial-rotate, 0deg)); } }
-        .frame-1 { --initial-rotate: -10deg; } .frame-2 { --initial-rotate: 12deg; } .frame-3 { --initial-rotate: 5deg; }
         @keyframes move-blob { from { transform: translate(0, 0) rotate(0deg) scale(1); } to { transform: translate(40px, -20px) rotate(180deg) scale(1.2); } }
         @keyframes animateGradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        
+        @keyframes photo-float-sway {
+            0% { transform: translateY(0px) rotate(var(--initial-rotate, 0deg)) scale(1); }
+            25% { transform: translateY(-15px) rotate(calc(var(--initial-rotate, 0deg) - 3deg)) scale(1.02); }
+            50% { transform: translateY(5px) rotate(var(--initial-rotate, 0deg)) scale(1); }
+            75% { transform: translateY(-15px) rotate(calc(var(--initial-rotate, 0deg) + 3deg)) scale(1.02); }
+            100% { transform: translateY(0px) rotate(var(--initial-rotate, 0deg)) scale(1); }
+        }
+
+        /* Responsive Media Queries */
+        @media (max-width: 992px) {
+            .hero-image-frame { display: none; }
+        }
         @media (max-width: 767px) {
+            .logo-text { display: none; }
+            .logo { height: 50px; }
             .hamburger { display: block; }
             .nav-links {
                 position: fixed; top: 0; right: 0; transform: translateX(100%);
@@ -149,7 +194,6 @@
             .hero p { font-size: 1.1rem; }
             .section { padding: 4rem 5%; }
             .section-title { font-size: 2.2rem; }
-            .hero-image-frame { display: none; }
             .hero { padding-bottom: 6rem; }
             .enrollment-section-wrapper { margin-top: 4rem; padding: 0 3%; }
             .enrollment-cta { padding: 4rem 1.5rem; border-radius: 30px; }
@@ -160,7 +204,10 @@
 </head>
 <body>
     <nav id="navbar">
-        <a href="index.html" class="logo">النجوم الصغار <span>🌟</span></a>
+        <a href="index.html" class="logo-link">
+            <img src="src/11.jpg" alt="روضة براعم بوصلة العلوم Logo" class="logo">
+            <span class="logo-text">روضة براعم بوصلة العلوم</span>
+        </a>
         <ul class="nav-links" id="navLinks">
             <li><a href="#home">الرئيسية</a></li>
             <li><a href="#about">عن الروضة</a></li>
@@ -177,7 +224,7 @@
     <main>
         <section class="hero" id="home">
             <div class="hero-content">
-                <h1>مكان يضيء فيه كل <span>نجم صغير</span></h1>
+                <h1>مكان يضيء فيه كل <span>برعم صغير</span></h1>
                 <p>انضموا إلى مغامرتنا التعليمية الساحرة. نرعى الفضول والإبداع والثقة من خلال التعلم القائم على اللعب والمرح.</p>
                 <a href="enroll.html" class="cta-button">
                     <span class="icon">🚀</span> ابدأ رحلتك
@@ -194,6 +241,9 @@
                     <div class="hero-image-frame frame-1"><img src="src/2.jpg" alt="أطفال يتعلمون"></div>
                     <div class="hero-image-frame frame-2"><img src="src/1.jpg" alt="أطفال يلعبون"></div>
                     <div class="hero-image-frame frame-3"><img src="src/3.jpg" alt="أنشطة جماعية"></div>
+                    <div class="hero-image-frame frame-4"><img src="src/4.jpg" alt="أنشطة فنية"></div>
+                    <div class="hero-image-frame frame-5"><img src="src/7.jpg" alt="لعب ومرح"></div>
+                    <div class="hero-image-frame frame-6"><img src="src/8.jpg" alt="أطفال يقرأون"></div>
                 </div>
             </div>
         </section>
@@ -222,28 +272,57 @@
         <section class="section programs" id="programs" style="background-color: #F7F8FC;">
             <h2 class="section-title">برامجنا المبتكرة</h2>
             <div class="programs-grid">
-                <div class="program-card" data-anim><img src="src/4.jpg" alt="البراعم الصغيرة" class="program-card-image"><div class="program-card-content"><h3>البراعم الصغيرة (2-3)</h3><p>مقدمة لطيفة لعالم المدرسة تركز على المهارات الحسية والاجتماعية.</p></div></div>
-                <div class="program-card" data-anim data-anim-delay="0.1s"><img src="src/5.jpg" alt="البراعم النامية" class="program-card-image"><div class="program-card-content"><h3>البراعم النامية (3-4)</h3><p>بناء الاستقلالية ومحو الأمية المبكرة من خلال اللعب المنظم.</p></div></div>
-                <div class="program-card" data-anim data-anim-delay="0.2s"><img src="src/6.jpg" alt="البراعم المستعدة" class="program-card-image"><div class="program-card-content"><h3>البراعم المستعدة (4-5)</h3><p>تحضير شامل للمدرسة مع التركيز على المهارات الأكاديمية والاجتماعية.</p></div></div>
+                <div class="program-card" data-anim>
+                    <img src="src/10.jpg" alt="قسم الرضع" class="program-card-image">
+                    <div class="program-card-content">
+                        <h3>قسم الرضع (3 أشهر - 2)</h3>
+                        <p>رعاية فائقة وأنشطة حسية لطيفة مصممة خصيصًا لأصغر براعمنا في بيئة آمنة ومحفزة.</p>
+                    </div>
+                </div>
+                <div class="program-card" data-anim data-anim-delay="0.1s">
+                    <img src="src/5.jpg" alt="قسم ما قبل التمهيدي" class="program-card-image">
+                    <div class="program-card-content">
+                        <h3>ما قبل التمهيدي (2 - 3)</h3>
+                        <p>نمهد الطريق للاستكشاف واللعب الإبداعي، مع التركيز على المهارات اللغوية والاجتماعية الأولى.</p>
+                    </div>
+                </div>
+                <div class="program-card" data-anim data-anim-delay="0.2s">
+                    <img src="src/6.jpg" alt="قسم التمهيدي" class="program-card-image">
+                    <div class="program-card-content">
+                        <h3>التمهيدي (3 - 5)</h3>
+                        <p>مغامرات تعليمية ممتعة تبني أساسيات القراءة والكتابة والعلوم من خلال اللعب المنظم.</p>
+                    </div>
+                </div>
+                <div class="program-card" data-anim data-anim-delay="0.3s">
+                    <img src="src/1.jpg" alt="قسم التحضيري" class="program-card-image">
+                    <div class="program-card-content">
+                        <h3>التحضيري (5 - 6)</h3>
+                        <p>برنامج متكامل يضمن انتقالًا سلسًا للمدرسة، مع تعزيز المهارات الأكاديمية والثقة بالنفس.</p>
+                    </div>
+                </div>
             </div>
         </section>
         
         <section class="section gallery" id="gallery">
             <h2 class="section-title">لحظات من الفرح</h2>
             <div class="gallery-grid">
-                <div class="gallery-item" data-anim><img src="src/4.jpg" alt="أطفال يلعبون"></div>
-                <div class="gallery-item" data-anim data-anim-delay="0.1s"><img src="src/5.jpg" alt="أنشطة تعليمية"></div>
-                <div class="gallery-item" data-anim data-anim-delay="0.2s"><img src="src/6.jpg" alt="وقت القصة"></div>
-                <div class="gallery-item" data-anim data-anim-delay="0.3s"><img src="src/7.jpg" alt="لعب خارجي"></div>
-                <div class="gallery-item" data-anim data-anim-delay="0.4s"><img src="src/8.jpg" alt="أنشطة فنية"></div>
-                <div class="gallery-item" data-anim data-anim-delay="0.5s"><img src="src/9.jpg" alt="أنشطة موسيقية"></div>
+                <div class="gallery-item" data-anim><img src="src/1.jpg" alt="لعب جماعي"></div>
+                <div class="gallery-item" data-anim data-anim-delay="0.1s"><img src="src/2.jpg" alt="أنشطة تعليمية"></div>
+                <div class="gallery-item" data-anim data-anim-delay="0.2s"><img src="src/3.jpg" alt="وقت الاستكشاف"></div>
+                <div class="gallery-item" data-anim data-anim-delay="0.3s"><img src="src/4.jpg" alt="لعب خارجي"></div>
+                <div class="gallery-item" data-anim data-anim-delay="0.4s"><img src="src/5.jpg" alt="أنشطة فنية"></div>
+                <div class="gallery-item" data-anim data-anim-delay="0.5s"><img src="src/6.jpg" alt="أنشطة موسيقية"></div>
+                <div class="gallery-item" data-anim data-anim-delay="0.6s"><img src="src/7.jpg" alt="لحظات التعلم"></div>
+                <div class="gallery-item" data-anim data-anim-delay="0.7s"><img src="src/8.jpg" alt="بناء وتركيب"></div>
+                <div class="gallery-item" data-anim data-anim-delay="0.8s"><img src="src/9.jpg" alt="وقت القصة"></div>
+                <div class="gallery-item" data-anim data-anim-delay="0.9s"><img src="src/10.jpg" alt="رعاية الصغار"></div>
             </div>
         </section>
         
         <section class="section testimonials" id="testimonials">
             <h2 class="section-title" style="color:var(--dark);">ماذا يقول الآباء السعداء</h2>
             <div class="testimonial-slider">
-                <div class="testimonial active"><i class="fas fa-quote-left quote-icon"></i><p>"روضة النجوم الصغار كانت أفضل قرار لابنتنا. تطورت ثقتها بنفسها بشكل لا يصدق!"</p><div class="parent-info"><div class="parent-avatar">👩</div><div class="parent-details"><h4>سارة أحمد</h4><p>والدة ميا</p></div></div></div>
+                <div class="testimonial active"><i class="fas fa-quote-left quote-icon"></i><p>"روضة براعم بوصلة العلوم كانت أفضل قرار لابنتنا. تطورت ثقتها بنفسها بشكل لا يصدق!"</p><div class="parent-info"><div class="parent-avatar">👩</div><div class="parent-details"><h4>سارة أحمد</h4><p>والدة ميا</p></div></div></div>
                 <div class="testimonial"><i class="fas fa-quote-left quote-icon"></i><p>"المعلمات رائعات والمنهج مبتكر. ابني يعود للمنزل كل يوم وهو متحمس ليشاركنا ما تعلمه."</p><div class="parent-info"><div class="parent-avatar">👨</div><div class="parent-details"><h4>محمد خالد</h4><p>والد يوسف</p></div></div></div>
             </div>
             <div class="testimonial-dots"><div class="dot active" data-index="0"></div><div class="dot" data-index="1"></div></div>
@@ -264,15 +343,15 @@
     
     <footer id="contact">
         <div class="footer-content">
-            <h3>روضة النجوم الصغار</h3>
-            <p>123 شارع سي الحواس | 0549765903 | mmourksi79@gmail.com</p>
+            <h3>روضة براعم بوصلة العلوم</h3>
+            <p>الحي الجامعي، مقابل مدخل باب الزيارة لمستشفى بشير بن ناصر، العالية، بسكرة</p>
             <div class="social-icons">
-                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=100086406284453" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://wa.me/213676392151" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="mailto:BAWSALATELOLOUM@GMAIL.COM" aria-label="Email"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
-        <div class="footer-bottom"><p>&copy; 2025 روضة النجوم الصغار. كل الحقوق محفوظة. <br> تطوير بحب ❤️ بواسطة <a href="mailto:mmourksi79@gmail.com">Mourksi El Moatassam</a></p></div>
+        <div class="footer-bottom"><p>&copy; 2025 روضة براعم بوصلة العلوم. كل الحقوق محفوظة. <br> تطوير بحب ❤️ بواسطة <a href="mailto:mmourksi79@gmail.com">Mourksi El Moatassam</a></p></div>
     </footer>
     
     <button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
