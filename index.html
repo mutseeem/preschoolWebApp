@@ -30,7 +30,7 @@
         }
         nav.scrolled { box-shadow: var(--shadow-elevation-medium); background-color: rgba(255, 255, 255, 0.85); }
         .logo-link { display: flex; align-items: center; text-decoration: none; }
-        .logo { height: 60px; width: auto; transition: transform 0.3s ease; }
+        .logo { height: 60px; width: auto; transition: transform 0.3s ease; border-radius: 50%; }
         .logo-link:hover .logo { transform: scale(1.1); }
         .logo-text { font-size: 1.6rem; color: var(--primary); font-weight: 900; margin-right: 1rem; }
 
@@ -93,18 +93,67 @@
         .gallery-item:hover img { transform: scale(1.15); }
         .gallery-item::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); opacity: 0; transition: all 0.5s; }
         .gallery-item:hover::after { opacity: 1; }
-        .testimonial-slider { max-width: 800px; margin: 2rem auto 0; position: relative; overflow: hidden; min-height: 350px; }
-        .testimonial { background: linear-gradient(135deg, var(--secondary), var(--green)); color: white; padding: 2.5rem; border-radius: 25px; box-shadow: var(--shadow-elevation-medium); margin: 0 auto; width: 90%; position: absolute; top: 0; left: 50%; transform: translateX(-50%) scale(0.95); opacity: 0; transition: all 0.6s ease-in-out; }
-        .testimonial.active { opacity: 1; z-index: 1; transform: translateX(-50%) scale(1); }
-        .testimonial i.quote-icon { font-size: 3rem; color: rgba(255,255,255,0.5); margin-bottom: 1rem; display: inline-block; }
-        .testimonial p { font-size: 1.2rem; line-height: 1.8; color: white; font-style: italic; font-weight: 500; }
-        .parent-info { display: flex; align-items: center; justify-content: center; margin-top: 2rem; }
-        .parent-avatar { width: 60px; height: 60px; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; margin-left: 1rem; color: var(--primary); font-size: 1.8rem; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .parent-details h4 { font-size: 1.3rem; color: white; font-weight: 700; }
-        .parent-details p { font-size: 1rem; color: rgba(255,255,255,0.8); margin-top: 0.3rem; font-style: normal; }
-        .testimonial-dots { display: flex; justify-content: center; margin-top: 1.5rem; }
-        .dot { width: 12px; height: 12px; border-radius: 50%; background-color: #ccc; margin: 0 6px; cursor: pointer; transition: all 0.4s ease; }
-        .dot.active { background-color: var(--primary); transform: scale(1.4); }
+
+        /* --- NEW PHILOSOPHY SECTION STYLES --- */
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+        .philosophy-card {
+            padding: 2.5rem;
+            border-radius: 30px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease;
+            box-shadow: var(--shadow-elevation-medium);
+            opacity: 0;
+        }
+        .philosophy-card:hover {
+            transform: translateY(-20px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        .philosophy-card .icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            transition: transform 0.5s ease;
+        }
+        .philosophy-card:hover .icon {
+            transform: scale(1.2) rotate(15deg);
+        }
+        .philosophy-card h3 {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+        .philosophy-card p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        .philosophy-card::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.6s ease;
+        }
+        .philosophy-card:hover::before {
+            transform: scale(1.5);
+            opacity: 0;
+        }
+        .card-curiosity { background: linear-gradient(135deg, #FFD166, #FF8C42); }
+        .card-creativity { background: linear-gradient(135deg, #FF6B6B, #FF8C42); }
+        .card-confidence { background: linear-gradient(135deg, #06D6A0, #3FC1C9); }
+        /* --- END OF NEW STYLES --- */
+        
         .enrollment-section-wrapper { padding: 0 5%; margin-top: 6rem; }
         .enrollment-cta { color: white; text-align: center; border-radius: 40px; padding: 6rem 2rem; position: relative; overflow: hidden; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); z-index: 1; }
         .enrollment-cta .cta-content { position: relative; z-index: 2; }
@@ -118,41 +167,24 @@
         .wave-divider { position: relative; bottom: -5px; z-index: 5; }
         .wave-divider svg .shape-fill { fill: var(--light); }
         
-        /* Footer Styles */
-        /* IMPORTANT FIX: Removed z-index: -1; from the footer */
         footer { 
-            background-color: #f7f8fc; 
-            color: #555; 
-            padding: 8rem 5% 2rem; 
-            margin-top: -5rem; 
-            position: relative; 
-            text-align: center; 
+            background-color: #f7f8fc; color: #555; padding: 8rem 5% 2rem; 
+            margin-top: -5rem; position: relative; text-align: center; 
         }
         .footer-content { max-width: 400px; margin: 0 auto 3rem; }
         .footer-content h3 { font-size: 2rem; color: var(--dark); font-weight: 900; margin-bottom: 1rem; }
         .footer-content p { margin-bottom: 1.5rem; }
         .social-icons { display: flex; gap: 1.5rem; margin-top: 1.5rem; justify-content: center; }
         
-        /* Colorful Button Styles */
         .social-icons a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            color: white;
-            font-size: 1.6rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
-            border: 2px solid white;
-            position: relative; /* Added for z-index context */
-            z-index: 1; /* Ensure icons are clickable */
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 55px; height: 55px; border-radius: 50%; color: white;
+            font-size: 1.6rem; text-decoration: none; transition: all 0.3s ease;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15); border: 2px solid white;
+            position: relative; z-index: 1;
         }
         .social-icons a:hover {
-            transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+            transform: translateY(-5px) scale(1.1); box-shadow: 0 12px 25px rgba(0,0,0,0.2);
         }
         .social-icons a[aria-label="Facebook"] { background-color: var(--facebook-blue); }
         .social-icons a[aria-label="WhatsApp"] { background-color: var(--whatsapp-green); }
@@ -164,7 +196,6 @@
         .back-to-top.visible { opacity: 1; visibility: visible; transform: scale(1); }
         .back-to-top:hover { background-color: var(--pink); transform: scale(1.1) rotate(10deg); }
         
-        /* Keyframe Animations */
         @keyframes float-1 { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-30px) rotate(15deg); } }
         @keyframes float-2 { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-25px) rotate(-10deg); } }
         @keyframes float-3 { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-20px) scale(1.05); } }
@@ -181,7 +212,6 @@
             100% { transform: translateY(0px) rotate(var(--initial-rotate, 0deg)) scale(1); }
         }
 
-        /* Responsive Media Queries */
         @media (max-width: 992px) {
             .hero-image-frame { display: none; }
         }
@@ -223,7 +253,7 @@
             <li><a href="#about">عن الروضة</a></li>
             <li><a href="#programs">البرامج</a></li>
             <li><a href="#gallery">معرض الصور</a></li>
-            <li><a href="#testimonials">آراء العملاء</a></li>
+            <li><a href="#philosophy">فلسفتنا</a></li>
             <li><a href="enroll.html">التسجيل</a></li>
         </ul>
         <button class="hamburger" id="hamburger" aria-label="Toggle menu">
@@ -248,12 +278,12 @@
                     <img src="https://img.icons8.com/plasticine/100/pencil.png" class="shape shape-6" alt="pencil icon" data-depth="0.5">
                     <img src="https://img.icons8.com/plasticine/100/book.png" class="shape shape-7" alt="book icon" data-depth="0.4">
                     <img src="https://img.icons8.com/clouds/100/cloud.png" class="shape shape-8" alt="cloud icon" data-depth="0.6">
-                    <div class="hero-image-frame frame-1"><img src="src/2.jpg" alt="أطفال يتعلمون"></div>
-                    <div class="hero-image-frame frame-2"><img src="src/1.jpg" alt="أطفال يلعبون"></div>
+                    <div class="hero-image-frame frame-1"><img src="src/1.jpg" alt="أطفال يتعلمون"></div>
+                    <div class="hero-image-frame frame-2"><img src="src/2.jpg" alt="أطفال يلعبون"></div>
                     <div class="hero-image-frame frame-3"><img src="src/3.jpg" alt="أنشطة جماعية"></div>
                     <div class="hero-image-frame frame-4"><img src="src/4.jpg" alt="أنشطة فنية"></div>
-                    <div class="hero-image-frame frame-5"><img src="src/7.jpg" alt="لعب ومرح"></div>
-                    <div class="hero-image-frame frame-6"><img src="src/8.jpg" alt="أطفال يقرأون"></div>
+                    <div class="hero-image-frame frame-5"><img src="src/5.jpg" alt="لعب ومرح"></div>
+                    <div class="hero-image-frame frame-6"><img src="src/6.jpg" alt="أطفال يقرأون"></div>
                 </div>
             </div>
         </section>
@@ -283,28 +313,28 @@
             <h2 class="section-title">برامجنا المبتكرة</h2>
             <div class="programs-grid">
                 <div class="program-card" data-anim>
-                    <img src="src/10.jpg" alt="قسم الرضع" class="program-card-image">
+                    <img src="src/7.jpg" alt="قسم الرضع" class="program-card-image">
                     <div class="program-card-content">
                         <h3>قسم الرضع (3 أشهر - 2)</h3>
                         <p>رعاية فائقة وأنشطة حسية لطيفة مصممة خصيصًا لأصغر براعمنا في بيئة آمنة ومحفزة.</p>
                     </div>
                 </div>
                 <div class="program-card" data-anim data-anim-delay="0.1s">
-                    <img src="src/5.jpg" alt="قسم ما قبل التمهيدي" class="program-card-image">
+                    <img src="src/8.jpg" alt="قسم ما قبل التمهيدي" class="program-card-image">
                     <div class="program-card-content">
                         <h3>ما قبل التمهيدي (2 - 3)</h3>
                         <p>نمهد الطريق للاستكشاف واللعب الإبداعي، مع التركيز على المهارات اللغوية والاجتماعية الأولى.</p>
                     </div>
                 </div>
                 <div class="program-card" data-anim data-anim-delay="0.2s">
-                    <img src="src/6.jpg" alt="قسم التمهيدي" class="program-card-image">
+                    <img src="src/9.jpg" alt="قسم التمهيدي" class="program-card-image">
                     <div class="program-card-content">
                         <h3>التمهيدي (3 - 5)</h3>
                         <p>مغامرات تعليمية ممتعة تبني أساسيات القراءة والكتابة والعلوم من خلال اللعب المنظم.</p>
                     </div>
                 </div>
                 <div class="program-card" data-anim data-anim-delay="0.3s">
-                    <img src="src/1.jpg" alt="قسم التحضيري" class="program-card-image">
+                    <img src="src/10.jpg" alt="قسم التحضيري" class="program-card-image">
                     <div class="program-card-content">
                         <h3>التحضيري (5 - 6)</h3>
                         <p>برنامج متكامل يضمن انتقالًا سلسًا للمدرسة، مع تعزيز المهارات الأكاديمية والثقة بالنفس.</p>
@@ -329,15 +359,26 @@
             </div>
         </section>
         
-        <section class="section testimonials" id="testimonials">
-            <h2 class="section-title" style="color:var(--dark);">ماذا يقول الآباء السعداء</h2>
-            <div class="testimonial-slider">
-                <div class="testimonial active"><i class="fas fa-quote-left quote-icon"></i><p>"روضة براعم بوصلة العلوم كانت أفضل قرار لابنتنا. تطورت ثقتها بنفسها بشكل لا يصدق!"</p><div class="parent-info"><div class="parent-avatar">👩</div><div class="parent-details"><h4>سارة أحمد</h4><p>والدة ميا</p></div></div></div>
-                <div class="testimonial"><i class="fas fa-quote-left quote-icon"></i><p>"المعلمات رائعات والمنهج مبتكر. ابني يعود للمنزل كل يوم وهو متحمس ليشاركنا ما تعلمه."</p><div class="parent-info"><div class="parent-avatar">👨</div><div class="parent-details"><h4>محمد خالد</h4><p>والد يوسف</p></div></div></div>
+        <section class="section philosophy" id="philosophy">
+            <h2 class="section-title">فلسفتنا التعليمية</h2>
+            <div class="philosophy-grid">
+                <div class="philosophy-card card-curiosity" data-anim>
+                    <span class="icon">💡</span>
+                    <h3>نغذي الفضول</h3>
+                    <p>نشجع الأطفال على طرح الأسئلة والاستكشاف والاكتشاف. كل يوم هو فرصة لتعلم شيء جديد ومثير عن العالم من حولهم.</p>
+                </div>
+                <div class="philosophy-card card-creativity" data-anim data-anim-delay="0.15s">
+                    <span class="icon">🎨</span>
+                    <h3>نلهم الإبداع</h3>
+                    <p>من خلال الفن والموسيقى واللعب التخيلي، نساعد الأطفال على التعبير عن أنفسهم وتطوير أفكارهم الفريدة وحل المشكلات بطرق مبتكرة.</p>
+                </div>
+                <div class="philosophy-card card-confidence" data-anim data-anim-delay="0.3s">
+                    <span class="icon">🌟</span>
+                    <h3>نبني الثقة</h3>
+                    <p>في بيئتنا الداعمة، يتعلم كل طفل تقدير قدراته، وتكوين صداقات، وتطوير المهارات الاجتماعية التي يحتاجها للنجاح في المدرسة والحياة.</p>
+                </div>
             </div>
-            <div class="testimonial-dots"><div class="dot active" data-index="0"></div><div class="dot" data-index="1"></div></div>
         </section>
-        
         <div class="enrollment-section-wrapper" id="enroll">
             <div class="wave-divider"><svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path></svg></div>
             <section class="section enrollment-cta">
@@ -361,7 +402,7 @@
                 <a href="mailto:BAWSALATELOLOUM@GMAIL.COM" aria-label="Email"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
-        <div class="footer-bottom"><p>&copy; 2025 روضة براعم بوصلة العلوم. كل الحقوق محفوظة. <br> تطوير بحب ❤️ بواسطة <a href="mailto:mmourksi79@gmail.com">Mourksi El Moatassam</a></p></div>
+        <div class="footer-bottom"><p>&copy; 2025 روضة براعم بوصلة العلوم. كل الحقوق محفوظة. <br> تطوير بحب ❤️ بواسطة <a href="https://browebs-se.publicvm.com" target="_blank" rel="noopener noreferrer">BroWebs</a></p></div>
     </footer>
     
     <button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
@@ -394,6 +435,16 @@
             hamburger.classList.toggle('active');
             navLinks.classList.toggle('active');
         });
+        
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if(navLinks.classList.contains('active')) {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
 
         const animatedElements = document.querySelectorAll('[data-anim]');
         const observer = new IntersectionObserver((entries) => {
@@ -407,29 +458,6 @@
             });
         }, { threshold: 0.1 });
         animatedElements.forEach(el => observer.observe(el));
-        
-        const testimonials = document.querySelectorAll('.testimonial');
-        const dots = document.querySelectorAll('.dot');
-        let currentTestimonial = 0;
-        if (testimonials.length > 0) {
-            const showTestimonial = (index) => {
-                testimonials.forEach(t => t.classList.remove('active'));
-                dots.forEach(d => d.classList.remove('active'));
-                testimonials[index].classList.add('active');
-                dots[index].classList.add('active');
-                currentTestimonial = index;
-            };
-            const nextTestimonial = () => showTestimonial((currentTestimonial + 1) % testimonials.length);
-            let testimonialInterval = setInterval(nextTestimonial, 6000);
-            dots.forEach(dot => {
-                dot.addEventListener('click', () => {
-                    showTestimonial(parseInt(dot.dataset.index));
-                    clearInterval(testimonialInterval);
-                    testimonialInterval = setInterval(nextTestimonial, 6000);
-                });
-            });
-            showTestimonial(0);
-        }
     });
     </script>
 </body>
